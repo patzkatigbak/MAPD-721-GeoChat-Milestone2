@@ -73,9 +73,17 @@
             android:textSize="14dp" />
 
         <TextView
-            android:id="@+id/chatMessageDate"
+            android:id="@+id/chatID"
             android:layout_below="@+id/body"
             android:layout_alignLeft="@+id/body"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14dp" />
+
+        <TextView
+            android:id="@+id/chatMessageDate"
+            android:layout_below="@+id/chatID"
+            android:layout_alignLeft="@+id/chatID"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="14dp" />
