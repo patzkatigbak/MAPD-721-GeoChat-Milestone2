@@ -1,5 +1,6 @@
 package com.zv.geochat.service;
 
+import android.annotation.SuppressLint;
 import android.app.NotificationManager;
 import android.app.Service;
 import android.content.Intent;
@@ -17,6 +18,10 @@ import com.zv.geochat.notification.NotificationDecorator;
 import com.zv.geochat.provider.ChatMessageStore;
 
 import static com.zv.geochat.R.id.userName;
+
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class ChatService extends Service {
     private static final String TAG = "ChatService";
@@ -36,9 +41,14 @@ public class ChatService extends Service {
 
     private String userName;
 
+    private int chatMessageDate;
+
+    private static final SimpleDateFormat sdf1 = new SimpleDateFormat("yyMMddHHmm");
+
     public ChatService() {
     }
 
+    @SuppressLint("InvalidWakeLockTag")
     @Override
     public void onCreate() {
         Log.v(TAG, "onCreate()");
@@ -93,7 +103,9 @@ public class ChatService extends Service {
 
 
     private void handleData(Bundle data) {
+
         int command = data.getInt(MSG_CMD);
+
         Log.d(TAG, "-(<- received command data to service: command=" + command);
         if (command == CMD_JOIN_CHAT) {
             String userName = (String) data.get(KEY_USER_NAME);
@@ -104,12 +116,13 @@ public class ChatService extends Service {
         } else if (command == CMD_SEND_MESSAGE) {
             String messageText = (String) data.get(KEY_MESSAGE_TEXT);
             notificationDecorator.displaySimpleNotification("Sending message...", messageText);
-            chatMessageStore.insert(new ChatMessage(userName, messageText));
+
+            chatMessageStore.insert(new ChatMessage(userName, messageText, ""));
         } else if (command == CMD_RECEIVE_MESSAGE) {
             String testUser = "Test User";
             String testMessage = "Simulated Message";
             notificationDecorator.displaySimpleNotification("New message...: "+ testUser, testMessage);
-            chatMessageStore.insert(new ChatMessage(testUser, testMessage));
+            chatMessageStore.insert(new ChatMessage(testUser, testMessage, ""));
         } else {
             Log.w(TAG, "Ignoring Unknown Command! id=" + command);
         }

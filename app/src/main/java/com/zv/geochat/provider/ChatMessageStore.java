@@ -11,6 +11,7 @@ import com.zv.geochat.model.ChatMessage;
 import com.zv.geochat.provider.GeoChatProviderMetadata.*;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 
@@ -76,6 +77,7 @@ public class ChatMessageStore {
 		int indexId = c.getColumnIndex(ChatMessageTableMetaData._ID);
 		int indexUserName = c.getColumnIndex(ChatMessageTableMetaData.USER_NAME);
 		int indexMsgBody = c.getColumnIndex(ChatMessageTableMetaData.MSG_BODY);
+		int indexMsgDate = c.getColumnIndex(ChatMessageTableMetaData.CHAT_MESSAGE_DATE);
 
 		//walk through the rows based on indexes
 		for (c.moveToFirst(); !c.isAfterLast(); c.moveToNext()) {
@@ -83,6 +85,7 @@ public class ChatMessageStore {
 			chatMessage.setId(c.getString(indexId));
 			chatMessage.setUserName(c.getString(indexUserName));
 			chatMessage.setBody(c.getString(indexMsgBody));
+			chatMessage.setMessageDate(c.getString(indexMsgDate));
 
 			list.add(chatMessage);
 
@@ -97,6 +100,7 @@ public class ChatMessageStore {
 		ContentValues cv = new ContentValues();
 		cv.put(ChatMessageTableMetaData.USER_NAME, chatMessage.getUserName());
 		cv.put(ChatMessageTableMetaData.MSG_BODY, chatMessage.getBody());
+		cv.put(ChatMessageTableMetaData.CHAT_MESSAGE_DATE, chatMessage.getBody());
 
 		Uri uri = ChatMessageTableMetaData.CONTENT_URI;
 		Log.v(TAG, "{db} insert uri: " + uri);
@@ -112,10 +116,15 @@ public class ChatMessageStore {
 	public void insert(ChatMessage chatMessage) {
 		ContentResolver contentResolver = context.getContentResolver();
 		// add to db
+
+		int intDate = (int) (new Date().getTime()/1000);
+		int chatMessageDate = intDate;
+
 		Log.v(TAG, "{db} +++++ add to db.... " + chatMessage);
 		ContentValues cv = new ContentValues();
 		cv.put(GeoChatProviderMetadata.ChatMessageTableMetaData.USER_NAME, chatMessage.getUserName());
 		cv.put(GeoChatProviderMetadata.ChatMessageTableMetaData.MSG_BODY, chatMessage.getBody());
+		cv.put(ChatMessageTableMetaData.CHAT_MESSAGE_DATE, chatMessageDate);
 
 		Uri uri = GeoChatProviderMetadata.ChatMessageTableMetaData.CONTENT_URI;
 		Log.v(TAG, "{db} insert uri: " + uri);

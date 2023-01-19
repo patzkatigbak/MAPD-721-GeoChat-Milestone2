@@ -25,12 +25,14 @@ public class ChatMessagesAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         public TextView userName;
         public TextView chatMessageBody;
         public ImageView imageView;
+        public TextView chatMessageDate;
 
         public ChatMessageViewHolder(View v) {
             super(v);
 
             userName = (TextView) v.findViewById(R.id.userName);
             chatMessageBody = (TextView) v.findViewById(R.id.body);
+            chatMessageDate = (TextView) v.findViewById(R.id.chatMessageDate);
             imageView = (ImageView) v.findViewById(R.id.image);
         }
     }
@@ -64,6 +66,7 @@ public class ChatMessagesAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         ChatMessageViewHolder vh = (ChatMessageViewHolder) holder;
         vh.userName.setText(item.getUserName());
         vh.chatMessageBody.setText(item.getBody());
+        vh.chatMessageDate.setText(item.getMessageDate());
         vh.data = item;
     }
 }
