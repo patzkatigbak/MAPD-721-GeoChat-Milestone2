@@ -7,8 +7,6 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/AndroidSemesterMilestone.app.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/AndroidSemesterMilestone.app.androidTest.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/AndroidSemesterMilestone.app.main.iml" filepath="$PROJECT_DIR$/.idea/modules/app/AndroidSemesterMilestone.app.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/AndroidSemesterMilestone.app.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/AndroidSemesterMilestone.app.unitTest.iml" />
-      <module fileurl="file://$PROJECT_DIR$/GeoChat.iml" filepath="$PROJECT_DIR$/GeoChat.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>
 </project>
